@@ -25,11 +25,13 @@ main {
 .board {
   width: var(--board-width);
   height: var(--board-height);
-  border: solid 1px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .tile {
   width: var(--tile-size);
   height: var(--tile-size);
   border: solid 1px;
+  background-color: hsl(210, 10%, 90%);
 }
