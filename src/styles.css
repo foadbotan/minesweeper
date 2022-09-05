@@ -5,3 +5,31 @@
   margin: 0;
   padding: 0;
 }
+
+:root {
+  --board-size: 5;
+  --tile-size: 50px;
+  --board-width: calc(var(--board-size) * var(--tile-size));
+  --board-height: var(--board-width);
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem;
+  padding-top: 5rem;
+}
+
+.board {
+  width: var(--board-width);
+  height: var(--board-height);
+  border: solid 1px;
+}
+
+.tile {
+  width: var(--tile-size);
+  height: var(--tile-size);
+  border: solid 1px;
+}
