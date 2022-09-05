@@ -1,3 +1,10 @@
+import Board from "./components/Board";
+
 export default function App() {
-  return <div>App</div>;
+  return (
+    <main>
+      <h1>Minesweeper</h1>
+      <Board />
+    </main>
+  );
 }
