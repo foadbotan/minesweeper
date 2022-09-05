@@ -1,10 +1,10 @@
-import Square from "./Square";
+import Tile from "./Tile";
 
 export default function Board() {
   return (
     <div>
       Board
-      <Square />
+      <Tile />
     </div>
   );
 }
