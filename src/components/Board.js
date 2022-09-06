@@ -1,28 +1,12 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import Tile from "./Tile";
-
-const BOARD_SIZE = 5;
-const MINE_COUNT = 5;
+import createNewBoard from "../utils/createNewBoard";
+import reducer from "../utils/reducer";
 
 export default function Board() {
-  const [board, setBoard] = useState(newBoard());
+  const [state, dispatch] = useReducer(reducer, { board: createNewBoard() });
 
-  console.log(board);
-  return <div className="board">{board.map(Tile)}</div>;
-}
+  const tiles = state.board.map((tile) => <Tile key={tile.id} tile={tile} dispatch={dispatch} />);
 
-function newBoard() {
-  let board = [];
-
-  for (let x = 0; x < BOARD_SIZE; x++) {
-    for (let y = 0; y < BOARD_SIZE; y++) {
-      board.push({
-        y,
-        x,
-        value: 3,
-      });
-    }
-  }
-
-  return board;
+  return <div className="board">{tiles}</div>;
 }
