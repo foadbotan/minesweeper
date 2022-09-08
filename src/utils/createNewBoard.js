@@ -7,8 +7,9 @@ export default function createNewBoard(boardSize = 5) {
         y,
         x,
         id: `${y} - ${x}`,
-        isShown: false,
-        isFlagged: false,
+        show: false,
+        flag: false,
+        nearbyMines: "2",
       });
     }
   }
