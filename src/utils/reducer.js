@@ -4,13 +4,23 @@ export const ACTIONS = {
 };
 
 export default function reducer(state, action) {
+  const tileId = action.payload;
+
   switch (action.type) {
     case ACTIONS.SHOW:
-      console.log("show", action.payload);
-      break;
+      return {
+        board: state.board.map((tile) => {
+          if (tile.id !== tileId || tile.flag) return tile;
+          return { ...tile, show: true };
+        }),
+      };
     case ACTIONS.FLAG:
-      console.log("flag", action.payload);
-      break;
+      return {
+        board: state.board.map((tile) => {
+          if (tile.id !== tileId || tile.show) return tile;
+          return { ...tile, flag: !tile.flag };
+        }),
+      };
   }
 
   return state;
