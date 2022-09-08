@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { ACTIONS } from "../utils/reducer";
 
-export default function Tile({ dispatch, tile }) {
+function Tile({ dispatch, tile }) {
   function handleRightClick(e) {
     e.preventDefault();
     dispatch({ type: ACTIONS.FLAG, payload: tile.id });
@@ -12,3 +13,5 @@ export default function Tile({ dispatch, tile }) {
 
   return <div className="tile" onClick={handleLeftClick} onContextMenu={handleRightClick}></div>;
 }
+
+export default memo(Tile);
