@@ -11,7 +11,16 @@ function Tile({ dispatch, tile }) {
     dispatch({ type: ACTIONS.SHOW, payload: tile.id });
   }
 
-  return <div className="tile" onClick={handleLeftClick} onContextMenu={handleRightClick}></div>;
+  return (
+    <div
+      className="tile"
+      style={{ backgroundColor: tile.flag && "yellow" }}
+      onClick={handleLeftClick}
+      onContextMenu={handleRightClick}
+    >
+      {tile.show && tile.nearbyMines}
+    </div>
+  );
 }
 
 export default memo(Tile);
