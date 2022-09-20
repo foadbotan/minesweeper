@@ -1,15 +1,15 @@
 import { useReducer } from "react";
 import Board from "./components/Board";
 import createNewBoard from "./utils/createNewBoard";
-import reducer from "./utils/reducer";
+import reducer from "./reducer";
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, { board: createNewBoard() });
+  const [board, dispatch] = useReducer(reducer, createNewBoard());
 
   return (
     <main>
       <h1>Minesweeper</h1>
-      <Board board={state.board} dispatch={dispatch} />
+      <Board board={board} dispatch={dispatch} />
     </main>
   );
 }
