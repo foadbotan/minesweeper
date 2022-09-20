@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { ACTIONS } from "../utils/reducer";
+import { ACTIONS } from "../reducer";
 
 function Tile({ dispatch, tile }) {
   function handleRightClick(e) {
