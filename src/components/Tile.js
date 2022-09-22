@@ -14,7 +14,7 @@ function Tile({ tile }) {
       onClick={handleLeftClick}
       onContextMenu={handleRightClick}
     >
-      {tile.isOpen && tile.nearbyMinesCount}
+      {tile.hasMine ? <div>💣</div> : tile.nearbyMinesCount}
     </div>
   );
 }
