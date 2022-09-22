@@ -12,17 +12,10 @@ export default function createNewBoard(boardSize = 5) {
         isOpen: false,
         isFlagged: false,
         hasMine: mines.includes(id),
-        nearbyMinesCount: 0,
+        nearbyMinesCount: mines.filter((mine) => isNearby(mine, { y, x })).length,
       });
     }
   }
-
-  mines.forEach((mine) => {
-    const nearbyTiles = getNearbyTiles(board, mine);
-    nearbyTiles.forEach((tile) => {
-      tile.nearbyMinesCount++;
-    });
-  });
 
   return board;
 }
@@ -43,10 +36,10 @@ function createMines(mineCount = 5, boardSize = 5) {
 }
 
 function getNearbyTiles(board, id) {
-  return board.filter(isTileNearby.bind(null, id));
+  return board.filter(isNearby.bind(null, id));
 }
 
-function isTileNearby(id, tile) {
+function isNearby(id, tile) {
   const { y, x } = tileIdToCoordinates(id);
   return Math.abs(y - tile.y) <= 1 && Math.abs(x - tile.x) <= 1;
 }
