@@ -1,24 +1,20 @@
 import { memo } from "react";
-import { ACTIONS } from "../reducer";
 
-function Tile({ dispatch, tile }) {
+function Tile({ tile }) {
   function handleRightClick(e) {
     e.preventDefault();
-    dispatch({ type: ACTIONS.FLAG, payload: tile.id });
   }
 
-  function handleLeftClick() {
-    dispatch({ type: ACTIONS.SHOW, payload: tile.id });
-  }
+  function handleLeftClick() {}
 
   return (
     <div
       className="tile"
-      style={{ backgroundColor: tile.flag && "yellow" }}
+      style={{ backgroundColor: tile.isFlagged && "yellow" }}
       onClick={handleLeftClick}
       onContextMenu={handleRightClick}
     >
-      {tile.show && tile.nearbyMines}
+      {tile.isOpen && tile.nearbyMinesCount}
     </div>
   );
 }
