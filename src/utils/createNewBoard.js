@@ -1,4 +1,4 @@
-export default function createNewBoard(boardWidth = 5, boardHeight = 5, mineCount = 5) {
+export default function createNewBoard({ boardWidth, boardHeight, mineCount }) {
   const boardSize = boardWidth * boardHeight;
   let board = Array(boardSize).fill(null);
   let mines = createMines(boardSize, mineCount);
