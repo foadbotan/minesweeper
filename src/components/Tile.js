@@ -1,6 +1,8 @@
 import { memo } from "react";
 
 function Tile({ tile }) {
+  let value = tile.hasMine ? "💣" : tile.nearbyMinesCount || "";
+
   function handleRightClick(e) {
     e.preventDefault();
   }
@@ -14,7 +16,7 @@ function Tile({ tile }) {
       onClick={handleLeftClick}
       onContextMenu={handleRightClick}
     >
-      {tile.hasMine ? <div>💣</div> : tile.nearbyMinesCount}
+      {value}
     </div>
   );
 }
