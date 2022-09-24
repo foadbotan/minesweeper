@@ -12,10 +12,19 @@ export default function App() {
   const [boardType, setBoardType] = useState(BOARD_TYPE.EXPERT);
   const [board, setBoard] = useState(createNewBoard(boardType));
 
+  function updateTile(index, callback) {
+    setBoard((prevBoard) => {
+      return prevBoard.map((tile) => {
+        if (tile.index !== index) return tile;
+        return callback(tile);
+      });
+    });
+  }
+
   return (
     <main style={{ "--width": boardType.boardWidth }}>
       <h1>Minesweeper</h1>
-      <Board board={board} />
+      <Board board={board} updateTile={updateTile} />
     </main>
   );
 }
