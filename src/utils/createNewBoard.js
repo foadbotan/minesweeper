@@ -1,9 +1,10 @@
-export default function createNewBoard(boardWidth = 5, mineCount = 5) {
-  let board = Array(boardWidth ** 2).fill(null);
-  let mines = createMines(boardWidth, mineCount);
+export default function createNewBoard(boardWidth = 5, boardHeight = 5, mineCount = 5) {
+  const boardSize = boardWidth * boardHeight;
+  let board = Array(boardSize).fill(null);
+  let mines = createMines(boardSize, mineCount);
 
   return board.map((_, index) => {
-    const nearbyTiles = getNearbyTiles(index, boardWidth);
+    const nearbyTiles = getNearbyTiles(index, boardWidth, boardSize);
     return {
       index,
       isOpen: false,
@@ -15,24 +16,23 @@ export default function createNewBoard(boardWidth = 5, mineCount = 5) {
   });
 }
 
-function createMines(boardWidth, mineCount) {
+function createMines(boardSize, mineCount) {
   let mines = [];
 
   while (mines.length < mineCount) {
-    const mine = Math.floor(Math.random() * boardWidth ** 2);
+    const mine = Math.floor(Math.random() * boardSize);
     if (!mines.includes(mine)) mines.push(mine);
   }
 
   return mines;
 }
 
-function getNearbyTiles(index, boardWidth) {
+function getNearbyTiles(index, boardWidth, boardSize) {
   const nearbyTiles = [];
-  const maxIndex = boardWidth ** 2;
 
   for (let y = index - boardWidth; y <= index + boardWidth; y += boardWidth) {
     for (let x = y - 1; x <= y + 1; x++) {
-      if (x >= 0 && x < maxIndex && x !== index) {
+      if (x >= 0 && x < boardSize && x !== index) {
         nearbyTiles.push(x);
       }
     }

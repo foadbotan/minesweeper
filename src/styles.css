@@ -6,14 +6,10 @@
   padding: 0;
 }
 
-:root {
-  --board-size: 5;
-  --tile-size: 50px;
-  --board-width: calc(var(--board-size) * var(--tile-size));
-  --board-height: var(--board-width);
-}
-
 main {
+  --width: 5;
+  --tile-size: 50px;
+  --board-width: calc(var(--width) * var(--tile-size));
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,7 +20,6 @@ main {
 
 .board {
   width: var(--board-width);
-  height: var(--board-height);
   display: flex;
   flex-wrap: wrap;
 }
