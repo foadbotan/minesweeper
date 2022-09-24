@@ -1,6 +1,6 @@
-export default function createNewBoard(boardWidth = 5) {
+export default function createNewBoard(boardWidth = 5, mineCount = 5) {
   let board = Array(boardWidth ** 2).fill(null);
-  let mines = createMines();
+  let mines = createMines(boardWidth, mineCount);
 
   return board.map((_, index) => {
     const nearbyTiles = getNearbyTiles(index, boardWidth);
@@ -15,7 +15,7 @@ export default function createNewBoard(boardWidth = 5) {
   });
 }
 
-function createMines(mineCount = 5, boardWidth = 5) {
+function createMines(boardWidth, mineCount) {
   let mines = [];
 
   while (mines.length < mineCount) {
