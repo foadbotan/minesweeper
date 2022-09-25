@@ -1,49 +1,42 @@
-export default function createNewBoard({ boardWidth, boardHeight, mineCount }) {
-  const boardSize = boardWidth * boardHeight;
-  let board = Array(boardSize).fill(null);
-  let mines = createMines(boardSize, mineCount);
+export default function createBoard({ boardWidth, boardHeight, mineCount }) {
+  const board = [];
+  const mines = createMines(boardWidth, boardHeight, mineCount);
 
-  return board.map((_, index) => {
-    const nearbyTiles = getNearbyTiles(index, boardWidth, boardSize);
-    return {
-      index,
-      isOpen: false,
-      isFlagged: false,
-      hasMine: mines.includes(index),
-      nearbyTiles,
-      nearbyMinesCount: CountMines(mines, nearbyTiles),
-    };
-  });
+  for (let y = 0; y < boardHeight; y++) {
+    const row = [];
+    for (let x = 0; x < boardWidth; x++) {
+      const tile = { y, x };
+      row.push({
+        y,
+        x,
+        id: JSON.stringify(tile),
+        isOpen: false,
+        isFlagged: false,
+        hasMine: hasTile(mines, tile),
+        nearbyTiles: [],
+        nearbyMinesCount: 0,
+      });
+    }
+    board.push(row);
+  }
+
+  return board;
 }
 
-function createMines(boardSize, mineCount) {
-  let mines = [];
+function createMines(boardWidth, boardHeight, mineCount) {
+  const mines = [];
 
   while (mines.length < mineCount) {
-    const mine = Math.floor(Math.random() * boardSize);
-    if (!mines.includes(mine)) mines.push(mine);
+    const mine = {
+      y: Math.floor(Math.random() * boardHeight),
+      x: Math.floor(Math.random() * boardWidth),
+    };
+    if (!hasTile(mines, mine)) mines.push(mine);
   }
 
   return mines;
 }
 
-function getNearbyTiles(index, boardWidth, boardSize) {
-  const nearbyTiles = [];
-
-  for (let y = index - boardWidth; y <= index + boardWidth; y += boardWidth) {
-    for (let x = y - 1; x <= y + 1; x++) {
-      if (x >= 0 && x < boardSize && x !== index) {
-        nearbyTiles.push(x);
-      }
-    }
-  }
-
-  return nearbyTiles;
-}
-
-function CountMines(mines, nearbyTiles) {
-  return nearbyTiles.reduce((count, tile) => {
-    if (mines.includes(tile)) count++;
-    return count;
-  }, 0);
+function hasTile(tiles, { y, x }) {
+  return tiles.some((tile) => tile.x === x && tile.y === y);
 }

@@ -1,11 +1,15 @@
 import Tile from "./Tile";
 
-export default function Board({ board, updateTile }) {
-  return (
-    <div className="board">
-      {board.map((tile) => (
-        <Tile key={tile.index} tile={tile} updateTile={updateTile} />
-      ))}
-    </div>
-  );
+export default function Board({ board }) {
+  const rows = board.map((row) => {
+    return (
+      <div className="row">
+        {row.map((tile) => {
+          return <Tile key={tile.id} tile={tile} />;
+        })}
+      </div>
+    );
+  });
+
+  return <div className="board">{rows}</div>;
 }
