@@ -56,7 +56,7 @@ function Tile({ tile, updateTile, setIsGameOver, isGameOver }) {
     <div
       className="tile"
       style={{
-        cursor: tile.isOpen || tile.isFlagged ? "" : "pointer",
+        cursor: tile.isOpen || tile.isFlagged ? "default" : "pointer",
         backgroundColor:
           isGameOver && tile.hasMine ? "hsl(0, 100%, 50%)" : tile.isOpen && "hsl(210, 10%, 80%)",
       }}
