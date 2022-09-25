@@ -41,4 +41,23 @@ main {
 
 .game-over {
   text-align: center;
+  position: absolute;
+  background-color: white;
+  top: 30%;
+  padding: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 10px;
+  font-size: xx-large;
+}
+
+.game-over button {
+  border: none;
+  padding: 1em 2em;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
