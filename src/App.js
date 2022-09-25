@@ -30,9 +30,18 @@ export default function App() {
     );
   }, []);
 
+  useEffect(() => {
+    resetGame();
+  }, [boardType]);
+
   return (
     <main style={{ "--width": boardType.boardWidth }}>
       <h1>Minesweeper</h1>
+      <div className="board-type">
+        <button onClick={() => setBoardType(BOARD_TYPE.BEGINNER)}>Beginner</button>
+        <button onClick={() => setBoardType(BOARD_TYPE.INTERMEDIATE)}>Intermediate</button>
+        <button onClick={() => setBoardType(BOARD_TYPE.EXPERT)}>Expert</button>
+      </div>
       {isGameOver && (
         <div className="game-over">
           <h2>Game Over!</h2>

@@ -16,12 +16,13 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  padding-top: 5rem;
+  margin: 2rem;
 }
 
 .board {
   display: flex;
   flex-direction: column;
+  border: 2px solid hsl(210, 10%, 70%);
 }
 
 .row {
@@ -44,21 +45,27 @@ main {
   text-align: center;
   position: absolute;
   background-color: white;
-  top: 30%;
-  padding: 5rem;
+  top: 50%;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   border-radius: 10px;
   font-size: xx-large;
+  border: 2px solid;
 }
 
-.game-over button {
+button {
   border: none;
-  padding: 1em 2em;
+  padding: 0.5em 1em;
   border-radius: 5px;
   letter-spacing: 2px;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.board-type {
+  display: flex;
+  gap: 1rem;
 }
