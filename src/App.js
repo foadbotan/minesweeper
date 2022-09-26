@@ -12,10 +12,12 @@ export default function App() {
   const [boardType, setBoardType] = useState(BOARD_TYPE.EXPERT);
   const [board, setBoard] = useState(createNewBoard(boardType));
   const [isGameOver, setIsGameOver] = useState(false);
+  const [isGameWon, setIsGameWon] = useState(false);
 
   function resetGame() {
     setBoard(createNewBoard(boardType));
     setIsGameOver(false);
+    setIsGameWon(false);
   }
 
   const updateTile = useCallback(({ y, x }, callback) => {
@@ -34,6 +36,23 @@ export default function App() {
     resetGame();
   }, [boardType]);
 
+  useEffect(() => {
+    const hasWon = board.every((row) =>
+      row.every((tile) => {
+        if (tile.isOpen && tile.hasMine) setIsGameOver(true);
+
+        const isFlaggedMine = tile.hasMine && tile.isFlagged;
+        const isOpenTile = !tile.hasMine && tile.isOpen;
+        return isFlaggedMine || isOpenTile;
+      })
+    );
+
+    if (hasWon) {
+      setIsGameWon(true);
+      setIsGameOver(true);
+    }
+  }, [board]);
+
   return (
     <main style={{ "--width": boardType.boardWidth }}>
       <h1>Minesweeper</h1>
@@ -44,7 +63,7 @@ export default function App() {
       </div>
       {isGameOver && (
         <div className="game-over">
-          <h2>Game Over!</h2>
+          <h2>{isGameWon ? "You Win! 🥳" : "Game Over! 😫"}</h2>
           <button onClick={resetGame}>Play Again</button>
         </div>
       )}
@@ -52,13 +71,7 @@ export default function App() {
         {board.map((row, index) => (
           <div className="row" key={index}>
             {row.map((tile) => (
-              <Tile
-                key={tile.id}
-                tile={tile}
-                updateTile={updateTile}
-                setIsGameOver={setIsGameOver}
-                isGameOver={isGameOver}
-              />
+              <Tile key={tile.id} tile={tile} updateTile={updateTile} isGameOver={isGameOver} />
             ))}
           </div>
         ))}

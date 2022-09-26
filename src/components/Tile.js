@@ -1,6 +1,6 @@
 import { memo, useEffect } from "react";
 
-function Tile({ tile, updateTile, setIsGameOver, isGameOver }) {
+function Tile({ tile, updateTile, isGameOver }) {
   let value = "";
   if (tile.isFlagged) value = "🚩";
   if (tile.isOpen) value = tile.nearbyMinesCount || "";
@@ -12,10 +12,6 @@ function Tile({ tile, updateTile, setIsGameOver, isGameOver }) {
       tile.nearbyTiles.forEach(openTile);
     }
   }, [tile.isOpen]);
-
-  useEffect(() => {
-    if (tile.hasMine && tile.isOpen) setIsGameOver(true);
-  }, [tile]);
 
   function handleLeftClick(e) {
     if (tile.isFlagged) return;
