@@ -49,8 +49,7 @@ function Tile({ tile, updateTile, setIsGameOver, isGameOver }) {
       className="tile"
       style={{
         cursor: tile.isOpen || tile.isFlagged ? "default" : "pointer",
-        backgroundColor:
-          isGameOver && tile.hasMine ? "hsl(0, 100%, 50%)" : tile.isOpen && "hsl(210, 10%, 80%)",
+        backgroundColor: tile.isOpen && (tile.hasMine ? "red" : "hsl(210, 10%, 80%)"),
       }}
       onClick={handleLeftClick}
       onContextMenu={handleRightClick}
