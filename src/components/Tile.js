@@ -1,37 +1,33 @@
 import { memo, useEffect } from "react";
 
 function Tile({ tile, updateTile, setIsGameOver, isGameOver }) {
-  let value = tile.isFlagged ? "🚩" : "";
-  if (tile.isOpen) {
-    value = tile.hasMine ? "💣" : tile.nearbyMinesCount || "";
-  }
-  if (isGameOver) value = tile.hasMine ? "💣" : value;
+  let value = "";
+  if (tile.isFlagged) value = "🚩";
+  if (tile.isOpen) value = tile.nearbyMinesCount || "";
+  if (isGameOver && tile.hasMine) value = "💣";
 
   useEffect(() => {
-    if (tile.nearbyMinesCount === 0 && tile.isOpen && !tile.hasMine) {
+    const tileIsEmpty = tile.nearbyMinesCount === 0 && tile.isOpen && !tile.hasMine;
+    if (tileIsEmpty) {
       tile.nearbyTiles.forEach(openTile);
     }
   }, [tile.isOpen]);
 
   useEffect(() => {
-    if (tile.hasMine && tile.isOpen) {
+    const isOpenMine = tile.hasMine && tile.isOpen;
+    if (isOpenMine) {
       setIsGameOver(true);
     }
   }, [tile]);
 
   function handleLeftClick(e) {
-    const singleClick = 1;
-    const doubleClick = 2;
-    switch (e.detail) {
-      case doubleClick:
-        tile.nearbyTiles.forEach((t) => {
-          openTile(t);
-        });
-        break;
-      case singleClick:
-        if (tile.isFlagged) return;
-        openTile(tile);
-        break;
+    if (tile.isFlagged) return;
+
+    const isDoubleClick = e.detail === 2;
+    if (isDoubleClick) {
+      tile.nearbyTiles.forEach(openTile);
+    } else {
+      openTile(tile);
     }
   }
 
