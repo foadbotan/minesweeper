@@ -16,7 +16,7 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  margin: 2rem;
+  padding: 4rem;
 }
 
 .board {
@@ -41,19 +41,25 @@ main {
   user-select: none;
 }
 
-.game-over {
-  text-align: center;
+.overlay {
+  background-color: hsl(0 0% 0% / 0.8);
   position: absolute;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  inset: 0;
+}
+
+.game-over-modal {
+  text-align: center;
   background-color: white;
-  top: 50%;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   border-radius: 10px;
-  font-size: xx-large;
-  border: 2px solid;
+  font-size: x-large;
 }
 
 button {
