@@ -1,6 +1,6 @@
-export default function createBoard({ boardWidth, boardHeight, mineCount }) {
+export default function createBoard({ boardWidth, boardHeight, numberOfMines }) {
   const board = [];
-  const mines = createMines(boardWidth, boardHeight, mineCount);
+  const mines = createMines(boardWidth, boardHeight, numberOfMines);
 
   for (let y = 0; y < boardHeight; y++) {
     const row = [];
@@ -24,10 +24,10 @@ export default function createBoard({ boardWidth, boardHeight, mineCount }) {
   return board;
 }
 
-function createMines(boardWidth, boardHeight, mineCount) {
+function createMines(boardWidth, boardHeight, numberOfMines) {
   const mines = [];
 
-  while (mines.length < mineCount) {
+  while (mines.length < numberOfMines) {
     const mine = {
       y: Math.floor(Math.random() * boardHeight),
       x: Math.floor(Math.random() * boardWidth),

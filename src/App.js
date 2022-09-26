@@ -3,9 +3,9 @@ import Tile from "./components/Tile";
 import createNewBoard from "./utils/createNewBoard";
 
 const BOARD_TYPE = {
-  BEGINNER: { boardWidth: 8, boardHeight: 8, mineCount: 10 },
-  INTERMEDIATE: { boardWidth: 16, boardHeight: 16, mineCount: 40 },
-  EXPERT: { boardWidth: 30, boardHeight: 16, mineCount: 99 },
+  BEGINNER: { boardWidth: 8, boardHeight: 8, numberOfMines: 10 },
+  INTERMEDIATE: { boardWidth: 16, boardHeight: 16, numberOfMines: 40 },
+  EXPERT: { boardWidth: 30, boardHeight: 16, numberOfMines: 99 },
 };
 
 export default function App() {
