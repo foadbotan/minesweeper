@@ -14,10 +14,7 @@ function Tile({ tile, updateTile, setIsGameOver, isGameOver }) {
   }, [tile.isOpen]);
 
   useEffect(() => {
-    const isOpenMine = tile.hasMine && tile.isOpen;
-    if (isOpenMine) {
-      setIsGameOver(true);
-    }
+    if (tile.hasMine && tile.isOpen) setIsGameOver(true);
   }, [tile]);
 
   function handleLeftClick(e) {
