@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Tile from "./components/Tile";
 import createNewBoard from "./utils/createNewBoard";
+import GameOverModal from "./components/GameOverModal";
 
 const BOARD_TYPE = {
   BEGINNER: { boardWidth: 8, boardHeight: 8, numberOfMines: 10 },
@@ -61,12 +62,7 @@ export default function App() {
         <button onClick={() => setBoardType(BOARD_TYPE.INTERMEDIATE)}>Intermediate</button>
         <button onClick={() => setBoardType(BOARD_TYPE.EXPERT)}>Expert</button>
       </div>
-      {isGameOver && (
-        <div className="game-over">
-          <h2>{isGameWon ? "You Win! 🥳" : "Game Over! 😫"}</h2>
-          <button onClick={resetGame}>Play Again</button>
-        </div>
-      )}
+      {isGameOver && <GameOverModal isGameWon={isGameWon} resetGame={resetGame} />}
       <div className="board">
         {board.map((row, index) => (
           <div className="row" key={index}>
