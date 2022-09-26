@@ -2,21 +2,22 @@ import { useCallback, useEffect, useState } from "react";
 import Tile from "./components/Tile";
 import createNewBoard from "./utils/createNewBoard";
 import GameOverModal from "./components/GameOverModal";
+import DifficultyLevel, { LEVELS } from "./components/DifficultyLevel";
 
-const BOARD_TYPE = {
+const DIFFICULTY_LEVEL = {
   BEGINNER: { boardWidth: 8, boardHeight: 8, numberOfMines: 10 },
   INTERMEDIATE: { boardWidth: 16, boardHeight: 16, numberOfMines: 40 },
   EXPERT: { boardWidth: 30, boardHeight: 16, numberOfMines: 99 },
 };
 
 export default function App() {
-  const [boardType, setBoardType] = useState(BOARD_TYPE.EXPERT);
-  const [board, setBoard] = useState(createNewBoard(boardType));
+  const [selectedLevel, setSelectedLevel] = useState(LEVELS.EXPERT);
+  const [board, setBoard] = useState(createNewBoard(DIFFICULTY_LEVEL[selectedLevel]));
   const [isGameOver, setIsGameOver] = useState(false);
   const [isGameWon, setIsGameWon] = useState(false);
 
   function resetGame() {
-    setBoard(createNewBoard(boardType));
+    setBoard(createNewBoard(DIFFICULTY_LEVEL[selectedLevel]));
     setIsGameOver(false);
     setIsGameWon(false);
   }
@@ -34,8 +35,9 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    console.log("reset");
     resetGame();
-  }, [boardType]);
+  }, [selectedLevel]);
 
   useEffect(() => {
     const hasLost = board.some((row) => row.some((tile) => tile.hasMine && tile.isOpen));
@@ -55,13 +57,9 @@ export default function App() {
   }, [board]);
 
   return (
-    <main style={{ "--width": boardType.boardWidth }}>
+    <main>
       <h1>Minesweeper</h1>
-      <div className="board-type">
-        <button onClick={() => setBoardType(BOARD_TYPE.BEGINNER)}>Beginner</button>
-        <button onClick={() => setBoardType(BOARD_TYPE.INTERMEDIATE)}>Intermediate</button>
-        <button onClick={() => setBoardType(BOARD_TYPE.EXPERT)}>Expert</button>
-      </div>
+      <DifficultyLevel selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel} />
       {isGameOver && <GameOverModal isGameWon={isGameWon} resetGame={resetGame} />}
       <div className="board">
         {board.map((row, index) => (

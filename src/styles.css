@@ -71,6 +71,11 @@ button {
   text-transform: uppercase;
 }
 
+.selected-level {
+  background-color: green;
+  color: white;
+}
+
 .board-type {
   display: flex;
   gap: 1rem;
