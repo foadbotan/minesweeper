@@ -23,8 +23,7 @@ function Tile({ tile, updateTile, setIsGameOver, isGameOver }) {
   function handleLeftClick(e) {
     if (tile.isFlagged) return;
 
-    const isDoubleClick = e.detail === 2;
-    if (isDoubleClick) {
+    if (tile.isOpen) {
       tile.nearbyTiles.forEach(openTile);
     } else {
       openTile(tile);
