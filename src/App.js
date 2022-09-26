@@ -37,16 +37,16 @@ export default function App() {
   }, [boardType]);
 
   useEffect(() => {
+    const hasLost = board.some((row) => row.some((tile) => tile.hasMine && tile.isOpen));
     const hasWon = board.every((row) =>
       row.every((tile) => {
-        if (tile.isOpen && tile.hasMine) setIsGameOver(true);
-
         const isFlaggedMine = tile.hasMine && tile.isFlagged;
         const isOpenTile = !tile.hasMine && tile.isOpen;
         return isFlaggedMine || isOpenTile;
       })
     );
 
+    if (hasLost) setIsGameOver(true);
     if (hasWon) {
       setIsGameWon(true);
       setIsGameOver(true);
