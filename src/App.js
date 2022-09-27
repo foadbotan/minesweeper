@@ -2,22 +2,16 @@ import { useCallback, useEffect, useState } from "react";
 import Tile from "./components/Tile";
 import createNewBoard from "./utils/createNewBoard";
 import GameOverModal from "./components/GameOverModal";
-import DifficultyLevel, { LEVELS } from "./components/DifficultyLevel";
-
-const DIFFICULTY_LEVEL = {
-  BEGINNER: { boardWidth: 8, boardHeight: 8, numberOfMines: 10 },
-  INTERMEDIATE: { boardWidth: 16, boardHeight: 16, numberOfMines: 40 },
-  EXPERT: { boardWidth: 30, boardHeight: 16, numberOfMines: 99 },
-};
+import LevelSelector, { DIFFICULTY_LEVELS } from "./components/LevelSelector";
 
 export default function App() {
-  const [selectedLevel, setSelectedLevel] = useState(LEVELS.EXPERT);
-  const [board, setBoard] = useState(createNewBoard(DIFFICULTY_LEVEL[selectedLevel]));
+  const [selectedLevel, setSelectedLevel] = useState(DIFFICULTY_LEVELS.EXPERT.level);
+  const [board, setBoard] = useState(createNewBoard(DIFFICULTY_LEVELS[selectedLevel]));
   const [isGameOver, setIsGameOver] = useState(false);
   const [isGameWon, setIsGameWon] = useState(false);
 
   function resetGame() {
-    setBoard(createNewBoard(DIFFICULTY_LEVEL[selectedLevel]));
+    setBoard(createNewBoard(DIFFICULTY_LEVELS[selectedLevel]));
     setIsGameOver(false);
     setIsGameWon(false);
   }
@@ -35,7 +29,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    console.log("reset");
     resetGame();
   }, [selectedLevel]);
 
@@ -59,7 +52,7 @@ export default function App() {
   return (
     <main>
       <h1>Minesweeper</h1>
-      <DifficultyLevel selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel} />
+      <LevelSelector selectedLevel={selectedLevel} setSelectedLevel={setSelectedLevel} />
       {isGameOver && <GameOverModal isGameWon={isGameWon} resetGame={resetGame} />}
       <div className="board">
         {board.map((row, index) => (
