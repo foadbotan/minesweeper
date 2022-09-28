@@ -9,6 +9,7 @@ export default function LevelSelector({ selectedLevel, setSelectedLevel }) {
     <div className="board-type">
       {Object.values(DIFFICULTY_LEVELS).map(({ level }) => (
         <button
+          key={level}
           onClick={() => setSelectedLevel(level)}
           className={selectedLevel === level ? "selected-level" : ""}
         >
