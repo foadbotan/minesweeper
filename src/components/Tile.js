@@ -4,7 +4,7 @@ function Tile({ tile, updateTile, isGameOver }) {
   let value = "";
   if (tile.isFlagged) value = "🚩";
   if (tile.isOpen) value = tile.nearbyMinesCount || "";
-  if (isGameOver && tile.hasMine) value = "💣";
+  if (isGameOver && tile.hasMine && !tile.isFlagged) value = "💣";
 
   useEffect(() => {
     const tileIsEmpty = tile.nearbyMinesCount === 0 && tile.isOpen && !tile.hasMine;
